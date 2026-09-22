@@ -32,7 +32,7 @@
     "g4:basic": "nodemon esempi/giorno4/01-basic-auth/app.js",
     "g4:session": "nodemon esempi/giorno4/02-session-based/app.js",
     "g4:jwt": "nodemon esempi/giorno4/03-jwt/app.js",
-    "es:g1:01": "node esercizi/giorno1/esercizio-01-soluzione.js 12 30",
+    "es:g1:01": "node esercizi/giorno1/esercizio-01-soluzione.js",
     "es:g1:02": "node esercizi/giorno1/esercizio-02-soluzione.js",
     "es:g1:03": "nodemon esercizi/giorno1/esercizio-03-soluzione.js",
     "es:g2:01": "nodemon esercizi/giorno2/esercizio-01-soluzione/app.js",
