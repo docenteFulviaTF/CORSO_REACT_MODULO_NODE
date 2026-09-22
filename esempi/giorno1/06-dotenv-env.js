@@ -11,7 +11,7 @@ require('dotenv').config(); // carica le variabili dal file .env, PRIMA di tutto
 const express = require('express');
 const app = express();
 
-// usa la variabile d'ambiente PORT, oppure 3000 come default se non è definita
+// usa la variabile d'ambiente PORT, oppure 4000 come default se non è definita
 const PORT = process.env.PORT || 4000;
 
 app.get('/', function (req, res) {

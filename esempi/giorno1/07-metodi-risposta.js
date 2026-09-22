@@ -18,39 +18,43 @@ const PORT = 3000;
 
 // Inviare JSON (il più usato nelle API)
 app.get('/json', function (req, res) {
-    res.json({ id: 1, nome: 'Luca', reparto: 'IT' });
+  res.json([
+    {id: 1, nome: 'Luca', reparto: 'IT'},
+    {id: 2, nome: 'Francesca', reparto: 'IT'}
+  ]);
 });
 
 // Inviare testo semplice
 app.get('/testo', function (req, res) {
-    res.send('Ciao!');
+  res.send('Ciao!');
 });
 
 // Inviare HTML
 app.get('/html', function (req, res) {
-    res.send('<h1>Ciao!</h1><p>Questo è HTML inviato con res.send</p>');
+  res.send('<h1>Ciao!</h1><p>Questo è HTML inviato con res.send</p>');
 });
 
 // Impostare uno status code prima di rispondere
 app.get('/creato', function (req, res) {
-    res.status(201).json({ messaggio: 'Creato con successo' });
+  res.status(201).json({messaggio: 'Creato con successo'});
 });
 
 app.get('/non-trovato', function (req, res) {
-    res.status(404).json({ errore: 'Risorsa non trovata' });
+  res.status(404).json({errore: 'Risorsa non trovata'});
 });
 
 // Reindirizzare il client a un altro URL
 app.get('/vecchia-pagina', function (req, res) {
-    res.redirect('/json'); // 302 Found di default
+  res.redirect('/json'); // 302 Found di default
 });
 
 // Terminare la risposta senza inviare dati
 app.get('/vuoto', function (req, res) {
-    res.status(204).end();
+  console.log('ho chiamato vuoto');
+  res.status(204).end();
 });
 
 app.listen(PORT, function () {
-    console.log(`Server in ascolto su http://localhost:${PORT}`);
-    console.log('Prova le rotte: /json /testo /html /creato /non-trovato /vecchia-pagina /vuoto');
+  console.log(`Server in ascolto su http://localhost:${PORT}`);
+  console.log('Prova le rotte: /json /testo /html /creato /non-trovato /vecchia-pagina /vuoto');
 });
