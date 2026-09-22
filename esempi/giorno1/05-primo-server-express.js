@@ -14,22 +14,26 @@ const PORT = 3000;
 
 // definisce una route: quando arriva una GET su '/', risponde con JSON
 app.get('/', function (req, res) {
-    //  ^^^                  ^^^   ^^^
-    //  metodo HTTP          req   res
-    //  e percorso           |     |
-    //                       |     risposta da inviare al client
-    //                       richiesta ricevuta dal client
-    res.json({ messaggio: 'Server Express funzionante!' });
+  //  ^^^                  ^^^   ^^^
+  //  metodo HTTP          req   res
+  //  e percorso           |     |
+  //                       |     risposta da inviare al client
+  //                       richiesta ricevuta dal client
+  res.json({messaggio: 'Server Express funzionante!'});
 });
 
 // una seconda route, per vedere che possiamo averne quante ne vogliamo
 app.get('/saluto', function (req, res) {
-    res.json({ messaggio: 'Ciao dal server!' });
+  res.json({messaggio: 'Ciao dal server!'});
+});
+
+app.get('/insulto', function (req, res) {
+  res.json({messaggio: 'Sei proprio un...'});
 });
 
 // avvia il server
 app.listen(PORT, function () {
-    console.log(`Server avviato su http://localhost:${PORT}`);
+  console.log(`Server avviato su http://localhost:${PORT}`);
 });
 
 // RICORDA: ogni route deve sempre inviare una risposta (res.json/res.send/...).

@@ -20,6 +20,7 @@ function calcolaQualcosa() {
 console.log('--- Blocco sincrono ---');
 const risultato = calcolaQualcosa(); // blocca finché non finisce
 console.log('Risultato calcolo:', risultato); // eseguita solo dopo
+console.log('alla fine del blocco sincrono');
 
 // ---------------------------------------------------------------------------
 // 2) CODICE ASINCRONO
@@ -34,6 +35,7 @@ console.log('\n--- Blocco asincrono ---');
 console.log('Prima della lettura');
 
 fs.readFile(path.join(__dirname, 'testo.txt'), 'utf8', function (err, contenuto) {
+  console.log();
   if (err) {
     console.error('Errore nella lettura del file:', err.message);
     return;

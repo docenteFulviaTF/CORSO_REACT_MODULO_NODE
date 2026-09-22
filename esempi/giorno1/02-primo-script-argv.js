@@ -11,7 +11,13 @@
 
 const nome = process.argv[2] || 'studente';
 
+console.log(process.argv[0]);
+console.log(process.argv[1]);
+console.log(__filename);
+console.log(process.argv.length);
 console.log('Ciao ' + nome + '!');
 
+process.argv[1] = 'modifica'; //gli elementi dell'array argv sono in lettura e scrittura
+console.log(process.argv[1]);
 // A differenza del browser, qui non esiste una pagina HTML: tutto avviene
 // nel terminale. Non esistono document, window, alert()...

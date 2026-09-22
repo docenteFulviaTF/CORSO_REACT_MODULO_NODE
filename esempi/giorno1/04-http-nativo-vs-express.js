@@ -8,7 +8,7 @@
 // Poi apri http://localhost:3000/ e http://localhost:3000/utenti
 
 // ---------------------------------------------------------------------------
-// VERSIONE 1 — modulo http nativo (commentata: decommentare per far vedere
+// VERSIONE 1 — modulo http nativo (commentata: scommentare per far vedere
 // la differenza dal vivo, disattivando prima la versione Express sotto)
 // ---------------------------------------------------------------------------
 /*
@@ -37,17 +37,16 @@ const express = require('express');
 const app = express();
 
 app.get('/', function (req, res) {
-    res.json({ messaggio: 'Home' });
+  res.json({messaggio: 'Home'});
 });
 
 app.get('/utenti', function (req, res) {
-    res.json([{ id: 1, nome: 'Luca' }]);
+  res.json([{id: 1, nome: 'Luca'}]);
 });
 
 // Express gestisce automaticamente le route non trovate (per ora con un
 // semplice "Cannot GET /xxx": lo miglioreremo il giorno 2)
 
 app.listen(3000, function () {
-    console.log('Server Express in ascolto su http://localhost:3000');
-    console.log('Confronta la lunghezza e la leggibilità con la versione http nativo qui sopra (commentata).');
+  console.log('Server Express in ascolto su http://localhost:3000');
 });
