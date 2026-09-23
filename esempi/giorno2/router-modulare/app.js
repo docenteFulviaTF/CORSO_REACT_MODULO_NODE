@@ -12,16 +12,16 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-app.use(express.json());   // necessario per leggere il body delle richieste (POST/PUT)
+app.use(express.json()); // necessario per leggere il body delle richieste (POST/PUT)
 
 // importa il router definito in routes-dipendenti.js
-const dipendentiRouter = require('./routes-dipendenti');
+//const dipendentiRouter = require('./routes-dipendenti');
 
 // monta il router sul prefisso /dipendenti: tutte le route definite nel router
 // diventano accessibili come /dipendenti, /dipendenti/:id, ecc.
-app.use('/dipendenti', dipendentiRouter);
+app.use('/dipendenti', require('./routes-dipendenti'));
 
 app.listen(PORT, function () {
-    console.log(`Server su porta ${PORT}`);
-    console.log('Il prefisso "/dipendenti" passato a app.use() si somma al percorso di ogni route nel router.');
+  console.log(`Server su porta ${PORT}`);
+  console.log('Il prefisso "/dipendenti" passato a app.use() si somma al percorso di ogni route nel router.');
 });

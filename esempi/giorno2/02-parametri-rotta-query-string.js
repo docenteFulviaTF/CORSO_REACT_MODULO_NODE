@@ -13,43 +13,53 @@ const app = express();
 const PORT = 3000;
 
 const tuttiIDipendenti = [
-    { id: 1, nome: 'Luca', reparto: 'IT' },
-    { id: 2, nome: 'Sara', reparto: 'HR' },
-    { id: 3, nome: 'Marco', reparto: 'IT' },
-    { id: 4, nome: 'Anna', reparto: 'CFO' }
+  {id: 1, nome: 'Luca', reparto: 'IT'},
+  {id: 2, nome: 'Sara', reparto: 'HR'},
+  {id: 3, nome: 'Marco', reparto: 'IT'},
+  {id: 4, nome: 'Anna', reparto: 'CFO'}
 ];
 
 // --- req.params: valori dentro l'URL, definiti con ":" nel percorso ---
 
 // :id è un parametro di rotta
 app.get('/dipendenti/:id', function (req, res) {
-    const id = req.params.id;
-    res.json({ messaggio: `Richiesto dipendente con id: ${id}`, tipoDiId: typeof id });
-    // ATTENZIONE: req.params.id è sempre una STRINGA, anche se sembra un numero.
-    // Per usarlo come numero: const idNumero = parseInt(req.params.id);
+  const id = req.params.id;
+  res.json({messaggio: `Richiesto dipendente con id: ${id}`, tipoDiId: typeof id});
+  // ATTENZIONE: req.params.id è sempre una STRINGA, anche se sembra un numero.
+  // Per usarlo come numero: const idNumero = parseInt(req.params.id);
 });
 
 // si possono avere più parametri nello stesso URL
 app.get('/reparti/:reparto/dipendenti/:id', function (req, res) {
-    const { reparto, id } = req.params;
-    res.json({ reparto, id });
+  const {reparto, id} = req.params;
+  res.json(tuttiIDipendenti.filter(d => d.reparto === reparto && d.id == id));
+});
+
+app.get('/:reparto/:id', function (req, res) {
+  //questa rotta funziona ma è meno leggibile rispetto alla precedente
+  console.log('entriamo nella rotta');
+  const {reparto, id} = req.params;
+  let result = tuttiIDipendenti.filter(d => d.reparto === reparto && d.id == id);
+  res.json(result);
 });
 
 // --- req.query: valori dopo il "?" nell'URL, per filtri/ordinamento/paginazione ---
 
 app.get('/dipendenti', function (req, res) {
-    const reparto = req.query.reparto;   // es. 'IT'
-    const limite = req.query.limite;     // es. '2' (stringa!)
+  const reparto = req.query.reparto; // es. 'IT'
+  const limite = req.query.limite; // es. '2' (stringa!)
 
-    let risultati = tuttiIDipendenti;
-    if (reparto) {
-        risultati = risultati.filter(d => d.reparto === reparto);
-    }
+  let risultati = tuttiIDipendenti;
+  if (reparto) {
+    risultati = risultati.filter(d => d.reparto === reparto);
+  }
 
-    res.json(risultati.slice(0, parseInt(limite) || 20));
+  res.json(risultati.slice(0, parseInt(limite) || 20));
 });
 
 app.listen(PORT, function () {
-    console.log(`Server in ascolto su http://localhost:${PORT}`);
-    console.log('req.params identifica UNA risorsa (/dipendenti/42); req.query filtra un elenco (/dipendenti?reparto=IT).');
+  console.log(`Server in ascolto su http://localhost:${PORT}`);
+  console.log(
+    'req.params identifica UNA risorsa (/dipendenti/42); req.query filtra un elenco (/dipendenti?reparto=IT).'
+  );
 });
