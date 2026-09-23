@@ -15,27 +15,27 @@ const PORT = 3000;
 app.use(express.json());
 
 app.post('/dipendenti', function (req, res) {
-    const { nome, cognome, reparto, stipendio } = req.body;
+  const {nome, cognome, reparto, stipendio} = req.body;
 
-    // Verifica campi obbligatori
-    if (!nome || !cognome || !reparto) {
-        return res.status(400).json({
-            errore: 'I campi nome, cognome e reparto sono obbligatori'
-        });
-    }
+  // Verifica campi obbligatori
+  if (!nome || !cognome || !reparto) {
+    return res.status(400).json({
+      errore: 'I campi nome, cognome e reparto sono obbligatori'
+    });
+  }
 
-    // Verifica tipo
-    if (stipendio !== undefined && typeof stipendio !== 'number') {
-        return res.status(400).json({
-            errore: 'Lo stipendio deve essere un numero'
-        });
-    }
+  // Verifica tipo
+  if (stipendio !== undefined && typeof stipendio !== 'number') {
+    return res.status(400).json({
+      errore: 'Lo stipendio deve essere un numero'
+    });
+  }
 
-    // Tutto ok: procedi con la creazione
-    res.status(201).json({ messaggio: 'Dipendente creato', nome, cognome, reparto, stipendio: stipendio || null });
+  // Tutto ok: procedi con la creazione
+  res.status(201).json({messaggio: 'Dipendente creato', nome, cognome, reparto, stipendio: stipendio || null});
 });
 
 app.listen(PORT, function () {
-    console.log(`Server in ascolto su http://localhost:${PORT}`);
-    console.log('Per progetti più grandi: librerie dedicate come express-validator o joi.');
+  console.log(`Server in ascolto su http://localhost:${PORT}`);
+  console.log('Per progetti più grandi: librerie dedicate come express-validator o joi.');
 });
