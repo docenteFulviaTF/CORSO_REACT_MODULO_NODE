@@ -14,14 +14,14 @@ const PORT = 3000;
 // Un middleware è una funzione (req, res, next) eseguita PRIMA che la route
 // finale gestisca la richiesta. Riceve gli stessi req/res della route, più next().
 function mioMiddleware(req, res, next) {
-    console.log('Richiesta ricevuta:', req.method, req.url);
-    next(); // passa al prossimo middleware o alla route
+  console.log('Richiesta ricevuta da mioMiddleware:', req.method, req.url);
+  next(); // passa al prossimo middleware o alla route
 }
 
-app.use(mioMiddleware);
+app.use(mioMiddleware); //registra ed esegue il middleware ad ogni request
 
 app.get('/', function (req, res) {
-    res.json({ messaggio: 'La route finale, eseguita dopo il middleware' });
+  res.json({messaggio: 'La route finale, eseguita dopo il middleware'});
 });
 
 // Cosa può fare ogni funzione nella catena:
@@ -31,6 +31,6 @@ app.get('/', function (req, res) {
 // - passare un errore alla catena di errori chiamando next(err)
 
 app.listen(PORT, function () {
-    console.log(`Server in ascolto su http://localhost:${PORT}`);
-    console.log('ATTENZIONE: se un middleware non chiama next() e non risponde, la richiesta resta bloccata per sempre.');
+  console.log(`Server in ascolto su http://localhost:${PORT}`);
+  console.log('ATTENZIONE: se un middleware non chiama next() e non risponde, la richiesta resta bloccata per sempre.');
 });
