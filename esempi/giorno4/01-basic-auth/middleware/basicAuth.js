@@ -5,33 +5,33 @@
 
 // Utenti validi (in un progetto reale vengono dal database)
 const utenti = [
-    { username: 'admin', password: 'password123' },
-    { username: 'operatore', password: 'qwerty456' }
+  {username: 'admin', password: 'password123'},
+  {username: 'operatore', password: 'qwerty456'}
 ];
 
 function basicAuth(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    if (!authHeader || !authHeader.startsWith('Basic ')) {
-        res.setHeader('WWW-Authenticate', 'Basic realm="API"');
-        return res.status(401).json({ errore: 'Autenticazione richiesta' });
-    }
+  const authHeader = req.headers['authorization'];
+  console.log('authHeader ' + authHeader);
+  if (!authHeader || !authHeader.startsWith('Basic ')) {
+    res.setHeader('WWW-Authenticate', 'Basic realm="API"');
+    return res.status(401).json({errore: 'Autenticazione richiesta'});
+  }
 
-    // Decodifica le credenziali da Base64
-    const base64 = authHeader.split(' ')[1];
-    const credenziali = Buffer.from(base64, 'base64').toString('utf8');
-    const [username, password] = credenziali.split(':');
+  // Decodifica le credenziali da Base64
+  const base64 = authHeader.split(' ')[1];
+  const credenziali = Buffer.from(base64, 'base64').toString('utf8');
+  console.log(credenziali);
+  const [username, password] = credenziali.split(':');
 
-    // Verifica le credenziali
-    const utente = utenti.find(
-        u => u.username === username && u.password === password
-    );
+  // Verifica le credenziali
+  const utente = utenti.find(u => u.username === username && u.password === password);
 
-    if (!utente) {
-        return res.status(401).json({ errore: 'Credenziali non valide' });
-    }
+  if (!utente) {
+    return res.status(401).json({errore: 'Credenziali non valide'});
+  }
 
-    req.utente = { username }; // aggiunge i dati utente a req
-    next();
+  req.utente = {username}; // aggiunge i dati utente a req
+  next();
 }
 
 module.exports = basicAuth;

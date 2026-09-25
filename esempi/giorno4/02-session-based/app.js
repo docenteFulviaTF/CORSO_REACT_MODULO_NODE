@@ -24,26 +24,30 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.use(session({
+app.use(
+  session({
     secret: process.env.SESSION_SECRET || 'chiave-segreta-dev',
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: false,       // true in produzione con HTTPS
-        httpOnly: true,      // il cookie non è accessibile da JavaScript nel browser
-        maxAge: 1000 * 60 * 60 * 24  // 24 ore in millisecondi
+      secure: false, // true in produzione con HTTPS
+      httpOnly: true, // il cookie non è accessibile da JavaScript nel browser
+      maxAge: 1000 * 60 * 60 * 24 // 24 ore in millisecondi
     }
-}));
+  })
+);
 
 app.use('/auth', authRouter);
 
 const dipendentiRouter = express.Router();
 dipendentiRouter.get('/', function (req, res) {
-    res.json({ messaggio: `Elenco dipendenti (sessione di ${req.session.username})` });
+  res.json({messaggio: `Elenco dipendenti (sessione di ${req.session.username})`});
 });
 app.use('/dipendenti', verificaSessione, dipendentiRouter);
 
 app.listen(PORT, function () {
-    console.log(`Server Session-based in ascolto su http://localhost:${PORT}`);
-    console.log('ATTENZIONE: le sessioni in memoria si perdono ad ogni riavvio del server. In produzione: Redis o un DB.');
+  console.log(`Server Session-based in ascolto su http://localhost:${PORT}`);
+  console.log(
+    'ATTENZIONE: le sessioni in memoria si perdono ad ogni riavvio del server. In produzione: Redis o un DB.'
+  );
 });
