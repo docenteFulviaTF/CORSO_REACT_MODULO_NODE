@@ -37,7 +37,6 @@ function App() {
       console.log('Gestisci login. Response = ', risposta);
       setToken(risposta.token);
       setUtente(risposta.utente);
-      caricaLibri();
     } catch (error) {
       setErroreLogin(error.message);
     }
@@ -46,6 +45,7 @@ function App() {
   const caricaLibri = useCallback(
     async function () {
       console.log('caricaLibri ingresso');
+      if (!token) return;
       setCaricamento(true);
       setErrore(null);
       try {
@@ -57,7 +57,7 @@ function App() {
         setCaricamento(false);
       }
     },
-    [genereFiltro]
+    [token, genereFiltro]
   );
 
   useEffect(
