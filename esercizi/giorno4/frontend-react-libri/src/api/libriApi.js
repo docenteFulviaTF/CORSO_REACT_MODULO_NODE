@@ -14,9 +14,9 @@
 const API_BASE_URL = 'http://localhost:3000';
 function headerAutenticazione(token) {
   console.log('headerAutenticazione token = ', token);
-  const result = token ? {asuthorization: 'Bearer ' + token} : {};
+  const result = token ? {authorization: 'Bearer ' + token} : {};
   console.log('headerAutenticazione result = ', result);
-  return;
+  return result;
 }
 
 // Legge la risposta e normalizza gli errori: se lo status non è 2xx, lancia
