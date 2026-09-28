@@ -32,19 +32,17 @@ function App() {
   async function gestisciLogin(username, password) {
     setErroreLogin(null); //resetto eventuale errore precedente
     try {
-      console.log('entro in gestisciLogin');
       const risposta = await login(username, password);
-      console.log('Gestisci login. Response = ', risposta);
       setToken(risposta.token);
       setUtente(risposta.utente);
     } catch (error) {
+      setToken(null);
       setErroreLogin(error.message);
     }
   }
 
   const caricaLibri = useCallback(
     async function () {
-      console.log('caricaLibri ingresso');
       if (!token) return;
       setCaricamento(true);
       setErrore(null);

@@ -1,8 +1,8 @@
 import {useState} from 'react';
 
 export default function LoginForm({onLogin, erroreLogin}) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('admin');
+  const [password, setPassword] = useState('password123');
 
   function gestisciSubmit(e) {
     e.preventDefault();

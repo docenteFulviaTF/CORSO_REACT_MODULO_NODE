@@ -13,9 +13,7 @@
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'; //da modificare per fare funzionare in render
 function headerAutenticazione(token) {
-  console.log('headerAutenticazione token = ', token);
   const result = token ? {authorization: 'Bearer ' + token} : {};
-  console.log('headerAutenticazione result = ', result);
   return result;
 }
 
